@@ -10,12 +10,17 @@ DinoDB is a simple and efficient database system implementation, focusing on the
 
 This project includes the following technical documents:
 
-- **B+ Tree.md** - Detailed introduction to B+ tree index structure implementation, including node structure, insertion, query, deletion, and update
-- **Concurrency for B+ Tree.md** - Explanation of B+ tree concurrent control implementation, focusing on pessimistic lock-crawling strategy
-- **Join.md** - Explanation of hash join algorithm implementation and optimization based on Bloom filters
-- **Pager.md** - Description of page manager design, including LRU cache mechanism and page replacement strategy
-- **Transaction.md** - Elaboration of transaction manager and concurrency control design, including 2PL protocol and deadlock detection
-- **RecoveryManager.md -** Detailed explanation of fault recovery mechanism based on WAL and simplified ARIES protocol
+- **B+ Tree.md** - Development of B+ tree index structure implementation, including node structure, insertion, query, deletion, and update
+
+- **Concurrency for B+ Tree.md** - Implementation of B+ tree concurrent control, focusing on pessimistic lock-crawling strategy
+
+- **Join.md** - Development of hash join algorithm implementation and optimization based on Bloom filters
+
+- **Pager.md** - Construction of page manager design, including LRU cache mechanism and page replacement strategy
+
+- **Transaction.md** - Implementation of transaction manager and concurrency control design, including 2PL protocol and deadlock detection
+
+- **RecoveryManager.md -** Development of fault recovery mechanism based on WAL and simplified ARIES protocol
 
 ## 🚀 Project Features
 * **📊 Data Structure**: B+ tree-based index structure, supporting efficient queries and range scans

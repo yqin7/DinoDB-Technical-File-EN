@@ -26,7 +26,15 @@
 - **Detect Deadlock**: Identify potential deadlock situations through a wait-for graph
 - **Rollback**: When a deadlock is detected, choose the current transaction to roll back, releasing all locks it holds
 
-## 1.2 How Strict 2PL Ensures ACID Properties
+## 1.2 Implementation of Strict Two-Phase Locking in LOCK API
+
+1. In the transaction manager, the purpose of Lock is to place read or write locks on keys of specified database indexes. This method follows the strict 2PL protocol, ensuring isolation between transactions.
+2. The implementation process is divided into several key steps: First, retrieve the corresponding transaction object through the client ID. Then check if the transaction already holds a lock on that resource - if it holds the same type of lock, return directly; if it tries to upgrade from a read lock to a write lock, this operation will be rejected because strict 2PL does not allow lock upgrades.
+3. Next is conflict detection and deadlock prevention. We identify all transactions that conflict with the current lock request and add corresponding wait edges to the wait-for graph, tracking dependencies between transactions. Then use DFS or topological sorting algorithms to detect if cycles exist in the wait-for graph, and if deadlock is detected, roll back the current transaction.
+4. If there is no deadlock, acquire the actual lock on the resource - for read locks, they can only be acquired when there are no write locks; for write locks, the resource needs to be completely free to acquire. If these requirements are not met, the current transaction will be blocked waiting. Finally, update the transaction's state, recording the locked resources it now holds.
+5. This design satisfies the isolation requirements of transactions, conforming to the working principles of the two phases and strict properties.
+
+## 1.3 How Strict 2PL Ensures ACID Properties
 
 **1. Atomicity**:
 
@@ -49,7 +57,7 @@
 - After a transaction commits, locks are released, and changes are permanently saved
 - Combined with logging mechanisms to ensure recovery to the correct state even if the system crashes
 
-## 1.3 Strict Two-Phase Locking Protocol vs. Regular Two-Phase Locking Protocol: Key Differences
+## 1.4 Strict Two-Phase Locking Protocol vs. Regular Two-Phase Locking Protocol: Key Differences
 
 **1. Main Difference**:
 
